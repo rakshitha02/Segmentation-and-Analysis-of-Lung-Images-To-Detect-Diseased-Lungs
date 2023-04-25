@@ -1,0 +1,40 @@
+%Flood-Fill segmentation
+
+I = imread(&#39;lungdiseased.png&#39;);
+I=rgb2gray(I);
+%subplot(331);
+figure;
+imshow(I);
+title(&#39;Original Image&#39;);
+BW = imbinarize(I);
+%subplot(332);
+figure;
+imshow(BW);
+title(&#39;Original Image Converted to Binary Image&#39;);
+BW2 = imfill(BW,&#39;holes&#39;);
+%subplot(334);
+figure;
+imshow(BW2);
+title(&#39;Flood-Filled Image&#39;);
+
+%k means segmentation
+I = imread(&quot;lungnormal.png&quot;);
+I=rgb2gray(I);
+Iblur1 = imgaussfilt(I,5);
+L = imsegkmeans(Iblur1,3);
+B = labeloverlay(Iblur1,L);
+subplot(221);
+imshow(I);
+title(&quot;Original Image&quot;);
+subplot(222);
+imshow(Iblur1);
+
+title(&quot;Gaussian blurred image&quot;);
+subplot(223);
+imshow(B);
+title(&quot;K means segmented image after smoothening&quot;);
+l = imsegkmeans(I,3);
+b = labeloverlay(I,L);
+subplot(224);
+imshow(b);
+title(&quot;K means with out smoothening&quot;);

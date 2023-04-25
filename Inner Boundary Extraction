@@ -1,0 +1,35 @@
+Inner boundary detection:
+a=imread(&#39;lungdiseased.png&#39;);
+SE= strel(&#39;rectangle&#39;,[10 10]);
+E=imerode(a,SE);
+figure;
+%subplot(331);
+figure;
+imshow(a);
+title(&#39;Original image - Healthy Lung&#39;);
+
+SE1 = strel(&#39;ball&#39;,10,5);
+F=imerode(a,SE1);
+%subplot(332);
+figure;
+imshow(F);
+title(&#39;Eroding with ball&#39;);
+SE2= strel(&#39;disk&#39;,10);
+G=imerode(a,SE2);
+%subplot(333);
+figure;
+imshow(G);
+title(&#39;Eroding with disc&#39;);
+op=imsubtract(a,G);
+%subplot(334);
+figure;
+
+imshow(op);
+title(&quot;Innerboundary detection- Eroding with
+disk&quot;);
+op=imsubtract(a,F);
+%subplot(336);
+figure;
+imshow(op);
+title(&quot;Innerboundary detection- Eroding with
+ball&quot;);
